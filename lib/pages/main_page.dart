@@ -13,6 +13,7 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   int _selectedIndex = 0;
+  DateTime? _selectedDeadline; // Переменная для хранения выбранного дедлайна
 
   static const List<Widget> _widgetOptions = <Widget>[
     TaskPage(), // Заменяем Text('Задачи') на TaskPage()
@@ -24,6 +25,35 @@ class _MainPageState extends State<MainPage> {
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
+    });
+  }
+
+  // Функция для показа диалога выбора даты и времени
+  void _showDeadlinePicker() {
+    showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime.now(),
+      lastDate: DateTime.now().add(const Duration(days: 365)),
+    ).then((pickedDate) {
+      if (pickedDate == null) return;
+
+      showTimePicker(
+        context: context,
+        initialTime: TimeOfDay.fromDateTime(pickedDate),
+      ).then((pickedTime) {
+        if (pickedTime == null) return;
+
+        setState(() {
+          _selectedDeadline = DateTime(
+            pickedDate.year,
+            pickedDate.month,
+            pickedDate.day,
+            pickedTime.hour,
+            pickedTime.minute,
+          );
+        });
+      });
     });
   }
 
@@ -71,6 +101,62 @@ class _MainPageState extends State<MainPage> {
         ],
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // Обработка добавления новой задачи
+          // Например, можно открыть диалог для ввода текста
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: const Text('Добавить задачу'),
+              content: SizedBox(
+                width: 400, // Устанавливаем ширину диалогового окна
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    TextField(
+                      decoration: const InputDecoration(labelText: 'Название'),
+                      // Ввод текста для новой задачи
+                    ),
+                    TextField(
+                      decoration: const InputDecoration(labelText: 'Описание'),
+                      // Ввод текста для описания задачи
+                    ),
+                    // Кнопка выбора дедлайна
+                    Padding( // Добавляем Padding для отступа
+                      padding: const EdgeInsets.symmetric(vertical: 16.0),
+                      child: ElevatedButton(
+                        onPressed: _showDeadlinePicker,
+                        child: const Text('Выбрать дедлайн'),
+                      ),
+                    ),
+                    // Отображение выбранного дедлайна
+                    if (_selectedDeadline != null)
+                      Text(
+                        'Выбранный дедлайн: ${_selectedDeadline}',
+                        style: const TextStyle(fontSize: 14),
+                      ),
+                  ],
+                ),
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: const Text('Отмена'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    // Сохранение новой задачи
+                    Navigator.pop(context);
+                  },
+                  child: const Text('Добавить'),
+                ),
+              ],
+            ),
+          );
+        },
+        child: const Icon(Icons.add),
       ),
     );
   }
