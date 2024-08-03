@@ -24,5 +24,10 @@ class DoDidDoneTheme {
         textStyle: const TextStyle(color: Colors.white), // Белый текст
       ),
     ),
+    // Добавляем тему для BottomNavigationBar
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      selectedItemColor: const Color(0xFF004D40), // Основной цвет
+      unselectedItemColor: Colors.grey, // Серый цвет для неактивных иконок
+    ),
   );
 }
