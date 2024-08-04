@@ -8,12 +8,12 @@ class TaskItem extends StatelessWidget {
   // final Duration duration; // Добавляем свойство для продолжительности
 
   const TaskItem({
-    Key? key,
+    super.key,
     required this.title,
     required this.description,
     required this.deadline,
     //required this.duration, // Передаем продолжительность
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +45,7 @@ class TaskItem extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
             decoration: BoxDecoration(
               gradient: gradient,
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(10),
                 topRight: Radius.circular(10),
               ),
@@ -70,7 +70,7 @@ class TaskItem extends StatelessWidget {
                       context: context,
                       builder: (context) => AlertDialog(
                         title: const Text('Редактировать задачу'),
-                        content: Column(
+                        content: const Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             TextField(

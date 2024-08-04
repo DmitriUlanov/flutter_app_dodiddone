@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../widgets/task_item.dart';
 
 class TaskPage extends StatefulWidget {
-  const TaskPage({Key? key}) : super(key: key);
+  const TaskPage({super.key});
 
   @override
   State<TaskPage> createState() => _TaskPageState();
@@ -11,7 +11,7 @@ class TaskPage extends StatefulWidget {
 
 class _TaskPageState extends State<TaskPage> {
   // Список задач (замените на реальные данные)
-  List<String> _tasks = [
+  final List<String> _tasks = [
     'Купить продукты',
     'Записаться на прием к врачу',
     'Позвонить другу',

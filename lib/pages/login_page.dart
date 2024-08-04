@@ -4,7 +4,7 @@ import '../theme/theme.dart';
 import 'main_page.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  const LoginPage({super.key});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -52,7 +52,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   const SizedBox(width: 10), // Отступ между картинкой и текстом
-                  Text(
+                  const Text(
                     'JUST DO IT',
                     style: TextStyle(
                       color: Colors.white,
@@ -77,9 +77,9 @@ class _LoginPageState extends State<LoginPage> {
                         color: DoDidDoneTheme.lightTheme.colorScheme.primary,
                       ),
                     ),
-                    TextSpan(
+                    const TextSpan(
                       text: '-did-',
-                      style: const TextStyle(color: Colors.white),
+                      style: TextStyle(color: Colors.white),
                     ),
                     TextSpan(
                       text: 'done',
@@ -136,7 +136,7 @@ class _LoginPageState extends State<LoginPage> {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => MainPage(),
+                      builder: (context) => const MainPage(),
                     ),
                   );
                 },

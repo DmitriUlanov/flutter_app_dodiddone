@@ -5,7 +5,7 @@ import '../theme/theme.dart';
 import '../screens/profile.dart'; // Импортируем profile_page
 
 class MainPage extends StatefulWidget {
-  const MainPage({Key? key}) : super(key: key);
+  const MainPage({super.key});
 
   @override
   State<MainPage> createState() => _MainPageState();
@@ -115,12 +115,12 @@ class _MainPageState extends State<MainPage> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    TextField(
-                      decoration: const InputDecoration(labelText: 'Название'),
+                    const TextField(
+                      decoration: InputDecoration(labelText: 'Название'),
                       // Ввод текста для новой задачи
                     ),
-                    TextField(
-                      decoration: const InputDecoration(labelText: 'Описание'),
+                    const TextField(
+                      decoration: InputDecoration(labelText: 'Описание'),
                       // Ввод текста для описания задачи
                     ),
                     // Кнопка выбора дедлайна
@@ -134,7 +134,7 @@ class _MainPageState extends State<MainPage> {
                     // Отображение выбранного дедлайна
                     if (_selectedDeadline != null)
                       Text(
-                        'Выбранный дедлайн: ${_selectedDeadline}',
+                        'Выбранный дедлайн: $_selectedDeadline',
                         style: const TextStyle(fontSize: 14),
                       ),
                   ],
