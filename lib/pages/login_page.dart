@@ -38,12 +38,56 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                isLogin ? 'Вход' : 'Регистрация',
-                style: const TextStyle(
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
+              // Добавляем Image.asset и Text "JUST DO IT" в одну строку
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // Добавляем ClipRRect для скругления картинки
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(40), // Скругление углов
+                    child: Image.asset(
+                      'assets/Morty_pic.png', // Замените на правильный путь к файлу
+                      height: 60,
+                      width: 60,
+                    ),
+                  ),
+                  const SizedBox(width: 10), // Отступ между картинкой и текстом
+                  Text(
+                    'JUST DO IT',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 60,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 150), // Увеличиваем отступ до 150
+              // Добавляем RichText для названия приложения
+              RichText(
+                text: TextSpan(
+                  style: const TextStyle(
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  children: [
+                    TextSpan(
+                      text: 'do',
+                      style: TextStyle(
+                        color: DoDidDoneTheme.lightTheme.colorScheme.primary,
+                      ),
+                    ),
+                    TextSpan(
+                      text: '-did-',
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                    TextSpan(
+                      text: 'done',
+                      style: TextStyle(
+                        color: DoDidDoneTheme.lightTheme.colorScheme.secondary,
+                      ),
+                    ),
+                  ],
                 ),
               ),
               const SizedBox(height: 30),
@@ -90,9 +134,11 @@ class _LoginPageState extends State<LoginPage> {
               ElevatedButton(
                 onPressed: () {
                   Navigator.pushReplacement(
-                    context, 
+                    context,
                     MaterialPageRoute(
-                      builder: (context) => MainPage()));
+                      builder: (context) => MainPage(),
+                    ),
+                  );
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: DoDidDoneTheme.lightTheme.colorScheme.primary,
@@ -114,7 +160,9 @@ class _LoginPageState extends State<LoginPage> {
                 child: Text(
                   isLogin ? 'У меня еще нет аккаунта...' : 'Уже есть аккаунт...',
                   style: TextStyle(
-                    color: DoDidDoneTheme.lightTheme.colorScheme.secondary,
+                    color: !isLogin 
+                        ? Colors.black // Изменяем цвет на черный, если isLogin == false
+                        : DoDidDoneTheme.lightTheme.colorScheme.secondary,
                   ),
                 ),
               ),
